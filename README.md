@@ -1,139 +1,100 @@
 # Events App
 
-A full-stack application combining a Next.js frontend with an Express/Node.js backend.
+A full-stack event management application with a Next.js frontend and an Express/MongoDB backend.
+
+---
 
 ## Project Structure
-
 ```
-events-app/
-├── frontend/     (Next.js frontend)
-└── backend/      (Express/Node.js backend)
+Events Team FULLSTACK/
+├── frontend/   # Next.js frontend
+└── backend/    # Express.js backend
 ```
 
-## Setup Instructions
+---
 
-### Prerequisites
+## Prerequisites
 - Node.js (v14 or higher)
 - npm or yarn
 - Git
+- MongoDB Atlas account (for backend)
 
-### Frontend Setup
+---
 
-1. Clone the frontend repository:
+## Setup Instructions
+
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/colaone1/Event-App-Team-Project-FE.git frontend
-cd frontend
+git clone <your-repo-url> .
+cd Events Team FULLSTACK
 ```
 
-2. Install dependencies:
+### 2. Backend Setup
 ```bash
+cd backend
 npm install
-# or
-yarn install
+```
+Create a `.env` file in `backend/` with:
+```
+PORT=3001
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+CORS_ORIGIN=http://localhost:3000
+```
+Start the backend:
+```bash
+npm run dev
 ```
 
-3. Configure environment variables:
-Create a `.env.local` file in the frontend directory with:
+### 3. Frontend Setup
+```bash
+cd ../frontend
+npm install
+```
+Create a `.env.local` file in `frontend/` with:
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
-
-4. Update API client configuration:
-Ensure the `apiClient.js` is configured to point to the backend URL and includes proper error handling.
-
-### Backend Setup
-
-1. Clone the backend repository:
+Start the frontend:
 ```bash
-git clone https://github.com/colaone1/Event-App-Team-Project-BE.git backend
-cd backend
-```
-
-2. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-```
-
-3. Configure environment variables:
-Create a `.env` file in the backend directory with:
-```
-PORT=3001
-DATABASE_URL=your_database_url
-CORS_ORIGIN=http://localhost:3000
-```
-
-4. Configure CORS:
-Ensure the backend is configured to accept requests from the frontend.
-
-## Running the Project
-
-### Development Mode
-
-1. Start the backend:
-```bash
-cd backend
 npm run dev
-# or
-yarn dev
 ```
 
-2. Start the frontend (in a new terminal):
-```bash
-cd frontend
-npm run dev
-# or
-yarn dev
-```
+- The frontend will be available at [http://localhost:3000](http://localhost:3000)
+- The backend will be available at [http://localhost:3001](http://localhost:3001)
 
-The frontend will be available at `http://localhost:3000`
-The backend will be available at `http://localhost:3001`
+---
 
-### Production Mode
+## How to Use the Site Locally
+1. **Register:** Go to `/register` and create a new account.
+2. **Login:** Go to `/login` and sign in.
+3. **View Events:** Visit `/events` to see all events.
+4. **Create Event:** Click "Create New Event" on the Events page. Fill in the form and submit.
+5. **Edit/Delete Events:** Use the Edit/Delete buttons on each event card (only for your own events).
+6. **Navigate:** Use the Home button on the Events page to return to the homepage.
 
-1. Build the frontend:
-```bash
-cd frontend
-npm run build
-# or
-yarn build
-```
+---
 
-2. Start the backend:
-```bash
-cd backend
-npm start
-# or
-yarn start
-```
+## Deployment
+- **Backend:** Deploy to [Render](https://render.com), [Railway](https://railway.app), or [Heroku](https://heroku.com).
+- **Frontend:** Deploy to [Vercel](https://vercel.com) (recommended for Next.js) or [Netlify](https://netlify.com).
+- **Update the frontend `.env.local`** with your deployed backend URL after deployment.
+
+---
 
 ## Environment Variables
+- **Frontend:** `NEXT_PUBLIC_API_URL` (backend API URL)
+- **Backend:** `PORT`, `MONGODB_URI`, `JWT_SECRET`, `CORS_ORIGIN`
 
-### Frontend (.env.local)
-- `NEXT_PUBLIC_API_URL`: Backend API URL (default: http://localhost:3001)
+---
 
-### Backend (.env)
-- `PORT`: Server port (default: 3001)
-- `DATABASE_URL`: Database connection string
-- `CORS_ORIGIN`: Frontend URL for CORS (default: http://localhost:3000)
+## Features
+- User registration & login (JWT authentication)
+- Create, view, edit, and delete events
+- Protected routes for authenticated users
+- Accessible, modern UI
 
-## API Documentation
-
-The backend API endpoints will be documented here. Please refer to the backend repository for detailed API documentation.
-
-## Additional Configuration
-
-### Optional Enhancements
-- Set up concurrently to run both services with one command
-- Add Docker configuration for easy deployment
-- Set up proper logging
-- Add API documentation
-
-## Contributing
-
-Please refer to the contributing guidelines in each repository for specific instructions.
+---
 
 ## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
+MIT 

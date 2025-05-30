@@ -26,13 +26,19 @@ export default function CreateEvent() {
         return;
       }
 
+      // Convert dateTime to ISO string if not already
+      const eventData = {
+        ...formData,
+        dateTime: formData.dateTime ? new Date(formData.dateTime).toISOString() : ''
+      };
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(eventData)
       });
 
       if (!response.ok) {

@@ -11,19 +11,10 @@ exports.getEvents = async (req, res) => {
 };
 
 exports.addEvent = async (req, res) => {
-  const userToken = req.headers.authorization.split(' ')[1];
+  // req.user is set by the auth middleware
+  const userId = req.user.userId;
 
-  console.log(userToken);
-
-  if (!userToken) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-
-  const userInDB = await User.findOne({ token: userToken });
-
-  console.log(userInDB);
-
-  if (!userInDB) {
+  if (!userId) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
@@ -31,9 +22,8 @@ exports.addEvent = async (req, res) => {
     name: req.body.name,
     description: req.body.description,
     location: req.body.location,
-    date: req.body.date,
-    time: req.body.time,
-    userId: userInDB._id,
+    dateTime: req.body.dateTime, // expects a single ISO string or Date
+    createdBy: userId,
   });
   try {
     const newEvent = await event.save();

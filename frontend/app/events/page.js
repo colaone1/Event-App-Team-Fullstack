@@ -78,12 +78,20 @@ export default function Events() {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-black">Events</h1>
-          <button
-            onClick={() => router.push('/events/create')}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Create New Event
-          </button>
+          <div className="flex space-x-3">
+            <button
+              onClick={() => router.push('/')}
+              className="px-4 py-2 bg-gray-200 text-black rounded-md hover:bg-gray-300"
+            >
+              Home
+            </button>
+            <button
+              onClick={() => router.push('/events/create')}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Create New Event
+            </button>
+          </div>
         </div>
 
         {error && (

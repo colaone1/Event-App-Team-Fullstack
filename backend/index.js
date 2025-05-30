@@ -27,6 +27,7 @@ app.get('/health', (req, res) => {
 connectDB()
   .then(() => {
     console.log('MongoDB connected successfully');
+    console.log('MONGODB_URI:', process.env.MONGODB_URI);
     // Start server after DB connection
     const PORT = process.env.PORT || 3001;
     app.listen(PORT, () => {

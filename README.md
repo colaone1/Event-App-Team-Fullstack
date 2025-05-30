@@ -98,3 +98,15 @@ npm run dev
 
 ## License
 MIT 
+
+---
+
+## Local Development: Git Hooks (Husky)
+- This project uses [Husky](https://typicode.github.io/husky/) for Git hooks (e.g., pre-push, pre-commit) to enforce code quality.
+- **After cloning or pulling the repo, run:**
+  ```bash
+  npx husky install
+  ```
+- This sets up Git hooks for your local repo only.
+- Husky is **not** run in CI/CD or on Render, so deployment is not affected.
+- You can find hook scripts in the `.husky/` directory (e.g., `.husky/pre-push`). 

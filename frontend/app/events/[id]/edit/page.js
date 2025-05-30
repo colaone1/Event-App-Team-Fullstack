@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { ApiClient } from "../../../apiClient/apiClient";
+import { ApiClient } from "../../../apiClient/apiClient.js";
 
 export default function EditEventPage() {
   const router = useRouter();

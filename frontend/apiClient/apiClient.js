@@ -2,6 +2,11 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 const url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
+function buildApiUrl(path) {
+  const base = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+  return base + '/' + path.replace(/^\//, '');
+}
+
 export class ApiClient {
   constructor() {
     // Initialize axios with default headers
@@ -56,7 +61,7 @@ export class ApiClient {
 
   async login(email, password) {
     try {
-      const response = await this.axiosInstance.post(`${url}auth/login`, {
+      const response = await this.axiosInstance.post(buildApiUrl('/auth/login'), {
         email,
         password
       });
@@ -69,7 +74,7 @@ export class ApiClient {
 
   async register(email, password) {
     try {
-      const response = await this.axiosInstance.post(`${url}auth/register`, {
+      const response = await this.axiosInstance.post(buildApiUrl('/auth/register'), {
         email,
         password
       });
@@ -88,7 +93,7 @@ export class ApiClient {
   // EVENTS API METHODS
   async getEvents() {
     try {
-      const response = await this.axiosInstance.get(`${url}events`);
+      const response = await this.axiosInstance.get(buildApiUrl('/events'));
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -97,7 +102,7 @@ export class ApiClient {
 
   async getEvent(id) {
     try {
-      const response = await this.axiosInstance.get(`${url}events/${id}`);
+      const response = await this.axiosInstance.get(buildApiUrl(`/events/${id}`));
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -106,7 +111,7 @@ export class ApiClient {
 
   async createEvent(eventData) {
     try {
-      const response = await this.axiosInstance.post(`${url}events`, eventData);
+      const response = await this.axiosInstance.post(buildApiUrl('/events'), eventData);
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -116,7 +121,7 @@ export class ApiClient {
   // Update an event by ID
   async updateEvent(id, eventData) {
     try {
-      const response = await this.axiosInstance.put(`${url}events/${id}`, eventData);
+      const response = await this.axiosInstance.put(buildApiUrl(`/events/${id}`), eventData);
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -126,7 +131,7 @@ export class ApiClient {
   // Delete an event by ID
   async deleteEvent(id) {
     try {
-      const response = await this.axiosInstance.delete(`${url}events/${id}`);
+      const response = await this.axiosInstance.delete(buildApiUrl(`/events/${id}`));
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;

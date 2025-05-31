@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ApiClient } from "@/apiClient/apiClient";
 
 export default function Login() {
   const router = useRouter();
@@ -17,28 +18,15 @@ export default function Login() {
     setError('');
     setLoading(true);
 
+    const apiClient = new ApiClient();
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
-      }
-
-      // Store the token
-      localStorage.setItem('token', data.token);
-      
-      // Redirect to events page
+      console.log('Attempting login...');
+      await apiClient.login(formData.email, formData.password);
+      console.log('Login successful, redirecting...');
       router.push('/events');
     } catch (err) {
-      setError(err.message);
+      console.log('Login error:', err);
+      setError(err.message || 'Login failed');
     } finally {
       setLoading(false);
     }

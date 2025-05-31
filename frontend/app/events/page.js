@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 export default function Events() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function Events() {
 
   const fetchEvents = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = Cookies.get('token');
       if (!token) {
         router.push('/login');
         return;
@@ -46,7 +47,7 @@ export default function Events() {
     }
 
     try {
-      const token = localStorage.getItem('token');
+      const token = Cookies.get('token');
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${eventId}`, {
         method: 'DELETE',
         headers: {

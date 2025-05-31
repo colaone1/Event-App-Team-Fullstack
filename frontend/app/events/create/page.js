@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 export default function CreateEvent() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function CreateEvent() {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem('token');
+      const token = Cookies.get('token');
       if (!token) {
         router.push('/login');
         return;

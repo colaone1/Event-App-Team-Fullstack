@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { ApiClient } from "../../../apiClient/apiClient.js";
+import { ApiClient } from "../../../../apiClient/apiClient.js";
 
 export default function EditEventPage() {
   const router = useRouter();
   const params = useParams();
   const { id } = params;
   const [formData, setFormData] = useState({
-    title: "",
+    name: "",
     description: "",
     location: "",
     date: "",
@@ -25,7 +25,7 @@ export default function EditEventPage() {
         const apiClient = new ApiClient();
         const event = await apiClient.getEvent(id);
         setFormData({
-          title: event.title || "",
+          name: event.name || "",
           description: event.description || "",
           location: event.location || "",
           date: event.date || "",
@@ -71,23 +71,23 @@ export default function EditEventPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Title</label>
-                <input type="text" name="title" value={formData.title} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                <input type="text" name="name" value={formData.name} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Description</label>
-                <textarea name="description" value={formData.description} onChange={handleChange} rows="4" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                <textarea name="description" value={formData.description} onChange={handleChange} rows="4" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Location</label>
-                <input type="text" name="location" value={formData.location} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                <input type="text" name="location" value={formData.location} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Date</label>
-                <input type="date" name="date" value={formData.date} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                <input type="date" name="date" value={formData.date} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Time</label>
-                <input type="time" name="time" value={formData.time} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                <input type="time" name="time" value={formData.time} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black" />
               </div>
               <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update Event</button>
             </form>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
-const url = "http://localhost:3001/";
+const url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 export class ApiClient {
   constructor() {

@@ -4,6 +4,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
+function buildApiUrl(path) {
+  const base = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+  return base + '/' + path.replace(/^\//, '');
+}
+
 export default function CreateEvent() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -33,7 +38,7 @@ export default function CreateEvent() {
         dateTime: formData.dateTime ? new Date(formData.dateTime).toISOString() : ''
       };
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
+      const response = await fetch(buildApiUrl('/events'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

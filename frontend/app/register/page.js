@@ -3,6 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+function buildApiUrl(path) {
+  const base = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+  return base + '/' + path.replace(/^\//, '');
+}
+
 export default function Register() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -26,16 +31,12 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
+      const response = await fetch(buildApiUrl('/auth/register'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          password: formData.password
-        }),
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();

@@ -4,6 +4,11 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
+function buildApiUrl(path) {
+  const base = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+  return base + '/' + path.replace(/^\//, '');
+}
+
 export default function Events() {
   const router = useRouter();
   const [events, setEvents] = useState([]);
@@ -22,7 +27,7 @@ export default function Events() {
         return;
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
+      const response = await fetch(buildApiUrl('/events'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -48,7 +53,7 @@ export default function Events() {
 
     try {
       const token = Cookies.get('token');
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${eventId}`, {
+      const response = await fetch(buildApiUrl(`/events/${eventId}`), {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

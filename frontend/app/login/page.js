@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ApiClient } from "@/apiClient/apiClient";
+import { ApiClient } from '../../apiClient/apiClient';
 
 export default function Login() {
   const router = useRouter();

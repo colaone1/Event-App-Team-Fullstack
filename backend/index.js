@@ -9,7 +9,10 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: [
+    'http://localhost:3000',
+    'https://event-app-team-fullstack-mynd-mkudzzhjr-sams-projects-88a29ea6.vercel.app'
+  ],
   credentials: true
 }));
 app.use(express.json());

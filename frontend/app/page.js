@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 export default function Home() {
   const router = useRouter();
@@ -9,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     // Check if user is authenticated
-    const token = localStorage.getItem('token');
+    const token = Cookies.get('token');
     setIsAuthenticated(!!token);
   }, []);
 
@@ -34,7 +35,7 @@ export default function Home() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    Cookies.remove('token');
     setIsAuthenticated(false);
     router.push('/');
   };
